@@ -6,7 +6,9 @@ import './App.css'
 function App() {
   const [a, setA] = useState(0)
   const [b, setB] = useState(0)
-  function handleseta(e){ 
+  const [sum, setSum] = useState(0)
+
+  function handlesetA(e){ 
     setA(e. target.value)
   }
   function handlesetB(e){ 
@@ -22,7 +24,7 @@ function App() {
       <br/>
       <input placeholder='input b' onChange={handlesetB} type='text'/>
       <br/>
-      <button onClick={handleClick}>Click</button>
+      <button onClick={handleClick}>Click</button> <br/>
       <span>{sum}</span>
      
 
