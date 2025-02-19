@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-      < input onChange={handleAssign} type="text" />
+      <input onChange={handleAssign} type="text" />
       <button onClick={handleClick} >Click</ button>
       <span>{name}</span>
      
