@@ -1,32 +1,68 @@
-import React, { useState } from 'react';
-import Modal from './Modal';
+import React, { useState } from "react";
+import Modal from "./Modal";
 
-const DataTable = ({ data, loading }) => {
+const DataTable = ({ data, loading, setOrders, setStats }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
-  
+
   const rowsPerPage = 10;
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = data.slice(indexOfFirstRow, indexOfLastRow);
-  
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  
+
   const openModal = (order) => {
     setSelectedOrder(order);
     setModalOpen(true);
   };
-  
+
   const closeModal = () => {
     setModalOpen(false);
   };
-  
-  const handleSave = (updatedOrder) => {
-    console.log('Saving updated order:', updatedOrder);
-    closeModal();
+
+  const handleSave = async (updatedOrder) => {
+    try {
+      const response = await fetch(`https://67ec9394aa794fb3222e224b.mockapi.io/report/${updatedOrder.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedOrder),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update order");
+      }
+
+      const updatedData = await response.json();
+
+      const updatedOrders = data.map((order) =>
+        order.id === updatedData.id ? { ...order, ...updatedData } : order
+      );
+
+      setOrders(updatedOrders);
+
+      const totalTurnover = updatedOrders.reduce(
+        (sum, item) => sum + (parseFloat(item.orderValue) || 0),
+        0
+      );
+      const totalProfit = totalTurnover * 0.35;
+
+      setStats({
+        turnover: { value: totalTurnover, change: 5.33 },
+        profit: { value: totalProfit, change: 3.21 },
+        newCustomers: { value: updatedOrders.length, change: 6.84 },
+      });
+
+      closeModal();
+    } catch (error) {
+      console.error("Error updating order:", error);
+      alert('Failed to update order');
+    }
   };
-  
+
   const getStatusClass = (status) => {
     switch(status) {
       case 'New':
@@ -107,9 +143,7 @@ const DataTable = ({ data, loading }) => {
               <button 
                 onClick={() => paginate(currentPage - 1)} 
                 disabled={currentPage === 1}
-                className={`w-8 h-8 flex items-center justify-center border rounded ${
-                  currentPage === 1 ? 'text-gray-300' : 'text-gray-600 hover:bg-gray-50'
-                }`}
+                className={`w-8 h-8 flex items-center justify-center border rounded ${currentPage === 1 ? 'text-gray-300' : 'text-gray-600 hover:bg-gray-50'}`}
               >
                 &lt;
               </button>
@@ -118,11 +152,7 @@ const DataTable = ({ data, loading }) => {
                 <button
                   key={number + 1}
                   onClick={() => paginate(number + 1)}
-                  className={`w-8 h-8 flex items-center justify-center border rounded ${
-                    currentPage === number + 1 
-                      ? 'bg-pink-500 text-white border-pink-500' 
-                      : 'text-gray-600 hover:bg-gray-50'
-                  }`}
+                  className={`w-8 h-8 flex items-center justify-center border rounded ${currentPage === number + 1 ? 'bg-pink-500 text-white border-pink-500' : 'text-gray-600 hover:bg-gray-50'}`}
                 >
                   {number + 1}
                 </button>
@@ -131,11 +161,7 @@ const DataTable = ({ data, loading }) => {
               <button 
                 onClick={() => paginate(currentPage + 1)} 
                 disabled={currentPage === Math.ceil(data.length / rowsPerPage)}
-                className={`w-8 h-8 flex items-center justify-center border rounded ${
-                  currentPage === Math.ceil(data.length / rowsPerPage) 
-                    ? 'text-gray-300' 
-                    : 'text-gray-600 hover:bg-gray-50'
-                }`}
+                className={`w-8 h-8 flex items-center justify-center border rounded ${currentPage === Math.ceil(data.length / rowsPerPage) ? 'text-gray-300' : 'text-gray-600 hover:bg-gray-50'}`}
               >
                 &gt;
               </button>
@@ -155,3 +181,4 @@ const DataTable = ({ data, loading }) => {
 };
 
 export default DataTable;
+
