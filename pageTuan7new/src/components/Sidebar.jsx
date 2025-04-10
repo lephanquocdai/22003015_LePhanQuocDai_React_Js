@@ -32,12 +32,12 @@ const Sidebar = () => {
         </div>
       </nav>
 
-      <div className="p-4 m-4 bg-blue-50 rounded-lg text-center mt-auto">
+      <div className="p-4 m-4 bg-blue-50 rounded-lg text-center mt-auto py-4">
         <div className="mb-2">
           <img src={img} alt="Promo" />
         </div>
         <div className="font-bold mb-2">v2.0 is available</div>
-        <button className="w-full py-2 px-4 text-black bg-white border border-black rounded hover:bg-gray-50">
+        <button className="w-full py-2 px-4 text-black bg-white border border-black rounded hover:bg-blue-400">
           Try now
         </button>
       </div>

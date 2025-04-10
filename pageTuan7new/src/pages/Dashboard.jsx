@@ -16,14 +16,11 @@ const Dashboard = () => {
             />
             <span className="absolute right-3 top-2.5 text-gray-400">🔍</span>
           </div>
-          <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-            🔔
+          <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">🔔
           </div>
-          <div className="w-8 h-8 bg-gray-500 rounded-full flex items-center justify-center">
-            ?
+          <div className="w-8 h-8 bg-gray-500 rounded-full flex items-center justify-center">?
           </div>
-          <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-            👤
+          <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">👤
           </div>
         </div>
       </header>
@@ -35,13 +32,13 @@ const Dashboard = () => {
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl text-black font-bold">Detailed report</h2>
           <div className="flex gap-2">
-            <button className="flex items-center px-4 py-2 bg-white border border-gray-200 rounded">
+            <button className="flex items-center px-4 py-2 bg-gray-300 border border-gray-200 rounded">
               <span className="mr-2">➕</span> Add
             </button>
-            <button className="flex items-center px-4 py-2 bg-white border border-gray-200 rounded">
+            <button className="flex items-center px-4 py-2 bg-gray-300 border border-gray-200 rounded">
               <span className="mr-2">⬆️</span> Import
             </button>
-            <button className="flex items-center px-4 py-2 bg-white border border-gray-200 rounded">
+            <button className="flex items-center px-4 py-2 bg-gray-300 border border-gray-200 rounded">
               <span className="mr-2">⬇️</span> Export
             </button>
           </div>

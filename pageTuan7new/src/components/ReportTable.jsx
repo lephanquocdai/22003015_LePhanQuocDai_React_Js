@@ -64,8 +64,7 @@ const ReportTable = () => {
               key={num}
               className={`w-8 h-8 flex items-center justify-center border rounded ${
                 num === 1 ? 'bg-pink-500 text-white border-pink-500' : 'text-gray-600 hover:bg-gray-50'
-              }`}
-            >
+              }`}>
               {num}
             </button>
           ))}
