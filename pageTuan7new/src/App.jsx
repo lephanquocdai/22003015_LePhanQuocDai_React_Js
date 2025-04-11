@@ -1,22 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
+import RootLayout from './layouts/RootLayout';
 import Dashboard from './pages/Dashboard';
-import './App.css'
+import './App.css';
 
-function App() {
+const App = () => {
   return (
     <Router>
-      <div className="flex min-h-screen">
-        <Sidebar />
-        <div className="flex-1 bg-gray-50 ">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-          </Routes>
-        </div>
-      </div>
+      <Routes>
+        <Route path="/" element={<RootLayout />}>
+          <Route index element={<Dashboard />} />
+        </Route>
+      </Routes>
     </Router>
   );
-}
+};
 
 export default App;
