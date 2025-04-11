@@ -77,8 +77,9 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
-        <p>Loading data...</p>
-      </section>
+        <DataTable loading={false} />
+</section>
+
     </div>
   );
 };
