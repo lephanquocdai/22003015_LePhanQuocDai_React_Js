@@ -9,7 +9,7 @@ const Overview = ({ stats }) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div className="bg-red-50 p-6 rounded-lg shadow-sm rounded-xl">
+      <div className="bg-red-50 p-6 rounded-xl shadow-sm">
         <h3 className="text-gray-600 mb-3">Turnover</h3>
         <div className="text-3xl font-bold mb-2">
           {formatCurrency(stats.turnover?.value)}
@@ -18,7 +18,8 @@ const Overview = ({ stats }) => {
           ↑ {stats.turnover?.change || 0}% period of change
         </div>
       </div>
-      <div className="bg-blue-50 p-6 rounded-lg shadow-sm rounded-xl">
+
+      <div className="bg-blue-50 p-6 rounded-xl shadow-sm">
         <h3 className="text-gray-600 mb-3">Profit</h3>
         <div className="text-3xl font-bold mb-2">
           {formatCurrency(stats.profit?.value)}
@@ -27,7 +28,8 @@ const Overview = ({ stats }) => {
           ↑ {stats.profit?.change || 0}% period of change
         </div>
       </div>
-      <div className="bg-green-50 p-6 rounded-lg shadow-sm rounded-xl">
+
+      <div className="bg-green-50 p-6 rounded-xl shadow-sm">
         <h3 className="text-gray-600 mb-3">New Customers</h3>
         <div className="text-3xl font-bold mb-2">
           {stats.newCustomers?.value || 0}

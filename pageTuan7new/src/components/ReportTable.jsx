@@ -3,7 +3,7 @@ import Modal from "./Modal";
 
 const ITEMS_PER_PAGE = 5;
 
-const ReportTable = ({ loading, onUpdateUser }) => {
+const ReportTable = ({ loading }) => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,11 +12,11 @@ const ReportTable = ({ loading, onUpdateUser }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://67ec9394aa794fb3222e224b.mockapi.io/report");
-        const result = await response.json();
+        const res = await fetch("https://67ec9394aa794fb3222e224b.mockapi.io/report");
+        const result = await res.json();
         setData(result);
-      } catch (error) {
-        console.error("Error fetching data: ", error);
+      } catch (err) {
+        console.error("Error fetching data:", err);
       }
     };
     fetchData();
@@ -24,11 +24,7 @@ const ReportTable = ({ loading, onUpdateUser }) => {
 
   const getMonthName = (dateString) => {
     const date = new Date(dateString);
-    if (!isNaN(date.getTime())) {
-      return date.toLocaleString('default', { month: 'long' });
-    } else {
-      return 'N/A';
-    }
+    return isNaN(date) ? 'N/A' : date.toLocaleString('default', { month: 'long' });
   };
 
   const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
@@ -36,8 +32,7 @@ const ReportTable = ({ loading, onUpdateUser }) => {
   const paginatedData = data.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   const handlePageChange = (page) => {
-    if (page < 1 || page > totalPages) return;
-    setCurrentPage(page);
+    if (page >= 1 && page <= totalPages) setCurrentPage(page);
   };
 
   const openEditModal = (user) => {
@@ -52,10 +47,8 @@ const ReportTable = ({ loading, onUpdateUser }) => {
 
   const handleSave = () => {
     if (selectedUser) {
-      setData((prevData) =>
-        prevData.map((user) =>
-          user.id === selectedUser.id ? selectedUser : user
-        )
+      setData((prev) =>
+        prev.map((u) => (u.id === selectedUser.id ? selectedUser : u))
       );
       closeModal();
     }
@@ -67,7 +60,7 @@ const ReportTable = ({ loading, onUpdateUser }) => {
         <table className="w-full">
           <thead>
             <tr className="border-b">
-              <th className="px-4 py-3 text-left"><input type="checkbox" /></th>
+              <th className="px-4 py-3"><input type="checkbox" /></th>
               <th className="px-4 py-3 text-left">Customer Name</th>
               <th className="px-4 py-3 text-left">Company</th>
               <th className="px-4 py-3 text-left">Order Value</th>
@@ -81,7 +74,7 @@ const ReportTable = ({ loading, onUpdateUser }) => {
               <tr><td colSpan="7" className="text-center py-8">Loading...</td></tr>
             ) : (
               paginatedData.map((user, i) => (
-                <tr key={user.id || i} className="border-b">
+                <tr key={user.id || `${i}-${user.customerName}`} className="border-b">
                   <td className="px-4 py-3"><input type="checkbox" /></td>
                   <td className="px-4 py-3 flex items-center">
                     <img
@@ -93,10 +86,7 @@ const ReportTable = ({ loading, onUpdateUser }) => {
                   </td>
                   <td className="px-4 py-3">{user.company}</td>
                   <td className="px-4 py-3">${(+user.orderValue).toLocaleString()}</td>
-                  <td className="px-4 py-3">
-                    {getMonthName(user.orderDate)} 
-                  </td>
-
+                  <td className="px-4 py-3">{getMonthName(user.orderDate)}</td>
                   <td className="px-4 py-3">
                     <span className={`px-2 py-1 rounded-md text-xs font-medium ${
                       user.status === 'Completed' ? 'bg-green-100 text-green-600' :
@@ -121,7 +111,6 @@ const ReportTable = ({ loading, onUpdateUser }) => {
         </table>
       </div>
 
-      
       <div className="px-4 py-3 border-t flex justify-between items-center">
         <span className="text-sm text-gray-600">
           Showing {startIndex + 1}-{Math.min(startIndex + ITEMS_PER_PAGE, data.length)} of {data.length} results
@@ -141,16 +130,17 @@ const ReportTable = ({ loading, onUpdateUser }) => {
         </div>
       </div>
 
-  
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        {selectedUser ? (
+        {selectedUser && (
           <div className="space-y-3">
             <div>
               <label className="block text-sm">Customer Name</label>
               <input
                 type="text"
                 value={selectedUser.customerName}
-                onChange={(e) => setSelectedUser({ ...selectedUser, customerName: e.target.value })}
+                onChange={(e) =>
+                  setSelectedUser({ ...selectedUser, customerName: e.target.value })
+                }
                 className="w-full border px-3 py-2 rounded"
               />
             </div>
@@ -159,7 +149,9 @@ const ReportTable = ({ loading, onUpdateUser }) => {
               <input
                 type="text"
                 value={selectedUser.company}
-                onChange={(e) => setSelectedUser({ ...selectedUser, company: e.target.value })}
+                onChange={(e) =>
+                  setSelectedUser({ ...selectedUser, company: e.target.value })
+                }
                 className="w-full border px-3 py-2 rounded"
               />
             </div>
@@ -168,7 +160,9 @@ const ReportTable = ({ loading, onUpdateUser }) => {
               <input
                 type="number"
                 value={selectedUser.orderValue}
-                onChange={(e) => setSelectedUser({ ...selectedUser, orderValue: e.target.value })}
+                onChange={(e) =>
+                  setSelectedUser({ ...selectedUser, orderValue: e.target.value })
+                }
                 className="w-full border px-3 py-2 rounded"
               />
             </div>
@@ -177,16 +171,19 @@ const ReportTable = ({ loading, onUpdateUser }) => {
               <input
                 type="date"
                 value={selectedUser.orderDate}
-                onChange={(e) => setSelectedUser({ ...selectedUser, orderDate: e.target.value })}
+                onChange={(e) =>
+                  setSelectedUser({ ...selectedUser, orderDate: e.target.value })
+                }
                 className="w-full border px-3 py-2 rounded"
               />
             </div>
-        
             <div>
               <label className="block text-sm">Status</label>
               <select
                 value={selectedUser.status}
-                onChange={(e) => setSelectedUser({ ...selectedUser, status: e.target.value })}
+                onChange={(e) =>
+                  setSelectedUser({ ...selectedUser, status: e.target.value })
+                }
                 className="w-full border px-3 py-2 rounded"
               >
                 <option value="New">New</option>
@@ -201,7 +198,7 @@ const ReportTable = ({ loading, onUpdateUser }) => {
               Save
             </button>
           </div>
-        ) : null}
+        )}
       </Modal>
     </div>
   );

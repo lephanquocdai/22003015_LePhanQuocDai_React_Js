@@ -3,6 +3,15 @@ import img from "../assets/3_Data/Selection_Sidebar.jpg";
 import imgLogo from "../assets/3_Data/Logo.jpg";
 
 const Sidebar = () => {
+  const menuItems = [
+    { icon: "📊", label: "Dashboard" },
+    { icon: "📁", label: "Projects" },
+    { icon: "👥", label: "Teams" },
+    { icon: "📈", label: "Analytics" },
+    { icon: "✉️", label: "Messages" },
+    { icon: "🔄", label: "Integrations" },
+  ];
+
   return (
     <div className="w-56 bg-white border-r border-gray-200 flex flex-col h-screen">
       <div className="px-5 py-4">
@@ -12,27 +21,17 @@ const Sidebar = () => {
       </div>
 
       <nav className="flex-1">
-        <div className="flex items-center px-5 py-3 text-gray-600 hover:bg-pink-500 hover:text-white mx-2 rounded cursor-pointer">
-          <span className="mr-3">📊</span> Dashboard
-        </div>
-        <div className="flex items-center px-5 py-3 text-gray-600 hover:bg-pink-500 hover:text-white mx-2 rounded cursor-pointer">
-          <span className="mr-3">📁</span> Projects
-        </div>
-        <div className="flex items-center px-5 py-3 text-gray-600 hover:bg-pink-500 hover:text-white mx-2 rounded cursor-pointer">
-          <span className="mr-3">👥</span> Teams
-        </div>
-        <div className="flex items-center px-5 py-3 text-gray-600 hover:bg-pink-500 hover:text-white mx-2 rounded cursor-pointer">
-          <span className="mr-3">📈</span> Analytics
-        </div>
-        <div className="flex items-center px-5 py-3 text-gray-600 hover:bg-pink-500 hover:text-white mx-2 rounded cursor-pointer">
-          <span className="mr-3">✉️</span> Messages
-        </div>
-        <div className="flex items-center px-5 py-3 text-gray-600 hover:bg-pink-500 hover:text-white mx-2 rounded cursor-pointer">
-          <span className="mr-3">🔄</span> Integrations
-        </div>
+        {menuItems.map((item, index) => (
+          <div
+            key={index}
+            className="flex items-center px-5 py-3 text-gray-600 hover:bg-pink-500 hover:text-white mx-2 rounded cursor-pointer"
+          >
+            <span className="mr-3">{item.icon}</span> {item.label}
+          </div>
+        ))}
       </nav>
 
-      <div className="p-4 m-4 bg-blue-50 rounded-lg text-center mt-auto py-4">
+      <div className="p-4 m-4 bg-blue-50 rounded-lg text-center mt-auto">
         <div className="mb-2">
           <img src={img} alt="Promo" />
         </div>
