@@ -7,6 +7,7 @@ import authReducer from '../features/authSlice';
 import userReducer from '../features/userSlice';
 import advancedCounterReducer from '../features/advancedCounterSlice';
 import bmiReducer from '../features/bmiSlice';
+import eventReducer from '../features/eventSlice';
  
 export default configureStore({
    reducer: {
@@ -18,5 +19,6 @@ export default configureStore({
      user: userReducer,
      advancedCounter: advancedCounterReducer,
      bmi: bmiReducer,
+     event: eventReducer,
    },
  });
