@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Counter from './components/Counter';
+import TodoList from './components/TodoList';
 
 function App() {
   return (
@@ -8,7 +9,8 @@ function App() {
        <Navbar />
        <div className="container mx-auto p-4">
          <Routes>
-           <Route path="/" element={<Counter />} />
+           <Route path="/" element={<Counter />}/>
+           <Route path="/todo" element={<TodoList />}/>
          </Routes>
        </div>
        </div>
