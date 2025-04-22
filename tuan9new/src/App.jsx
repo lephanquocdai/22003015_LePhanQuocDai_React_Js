@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Counter from './components/Counter';
 import TodoList from './components/TodoList';
 import Theme from './components/Theme';
+import ShoppingCart from './components/ShoppingCart';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
            <Route path="/" element={<Counter />}/>
            <Route path="/todo" element={<TodoList />}/>
            <Route path="/theme" element={<Theme />} />
+           <Route path="/cart" element={<ShoppingCart />} />
          </Routes>
        </div>
        </div>
