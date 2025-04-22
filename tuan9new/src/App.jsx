@@ -7,6 +7,7 @@ import ShoppingCart from './components/ShoppingCart';
 import Auth from './components/Auth';
 import UserList from './components/UserList';
 import AdvancedCounter from './components/AdvancedCounter';
+import BMICalculator from './components/BMICalculator';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
            <Route path="/auth" element={<Auth />} />
            <Route path="/users" element={<UserList />} />
            <Route path="/advanced-counter" element={<AdvancedCounter />} />
+           <Route path="/bmi" element={<BMICalculator />} />
          </Routes>
        </div>
        </div>
