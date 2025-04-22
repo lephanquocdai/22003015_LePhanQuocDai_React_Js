@@ -5,6 +5,7 @@ import themeReducer from '../features/themeSlice';
 import cartReducer from '../features/cartSlice';
 import authReducer from '../features/authSlice';
 import userReducer from '../features/userSlice';
+import advancedCounterReducer from '../features/advancedCounterSlice';
  
 export default configureStore({
    reducer: {
@@ -14,5 +15,6 @@ export default configureStore({
      cart: cartReducer,
      auth: authReducer,
      user: userReducer,
+     advancedCounter: advancedCounterReducer,
    },
  });

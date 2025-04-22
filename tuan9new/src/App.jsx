@@ -6,6 +6,7 @@ import Theme from './components/Theme';
 import ShoppingCart from './components/ShoppingCart';
 import Auth from './components/Auth';
 import UserList from './components/UserList';
+import AdvancedCounter from './components/AdvancedCounter';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
            <Route path="/cart" element={<ShoppingCart />} />
            <Route path="/auth" element={<Auth />} />
            <Route path="/users" element={<UserList />} />
+           <Route path="/advanced-counter" element={<AdvancedCounter />} />
          </Routes>
        </div>
        </div>
