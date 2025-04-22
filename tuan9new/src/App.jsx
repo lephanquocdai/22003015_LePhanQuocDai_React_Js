@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Counter from './components/Counter';
 import TodoList from './components/TodoList';
+import Theme from './components/Theme';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
          <Routes>
            <Route path="/" element={<Counter />}/>
            <Route path="/todo" element={<TodoList />}/>
+           <Route path="/theme" element={<Theme />} />
          </Routes>
        </div>
        </div>
