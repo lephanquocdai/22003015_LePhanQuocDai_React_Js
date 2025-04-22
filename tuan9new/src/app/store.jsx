@@ -4,6 +4,7 @@ import todoReducer from '../features/todoSlice';
 import themeReducer from '../features/themeSlice';
 import cartReducer from '../features/cartSlice';
 import authReducer from '../features/authSlice';
+import userReducer from '../features/userSlice';
  
 export default configureStore({
    reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
      theme: themeReducer,
      cart: cartReducer,
      auth: authReducer,
+     user: userReducer,
    },
  });

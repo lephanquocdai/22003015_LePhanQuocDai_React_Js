@@ -5,6 +5,7 @@ import TodoList from './components/TodoList';
 import Theme from './components/Theme';
 import ShoppingCart from './components/ShoppingCart';
 import Auth from './components/Auth';
+import UserList from './components/UserList';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
            <Route path="/theme" element={<Theme />} />
            <Route path="/cart" element={<ShoppingCart />} />
            <Route path="/auth" element={<Auth />} />
+           <Route path="/users" element={<UserList />} />
          </Routes>
        </div>
        </div>
